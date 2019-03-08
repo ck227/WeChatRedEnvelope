@@ -2,4 +2,6 @@
     <string name="app_name">WeChatRedEnvelope</string>
     <string name="title_home">首页</string>
     <string name="title_setting">设置</string>
+
+    <string name="accessibility_description">auto get red envelope service。</string>
 </resources>
