@@ -27,7 +27,7 @@ public class ListenWeChatService extends AccessibilityService {
     public void onCreate() {
         super.onCreate();
         mAccessbilityTasks = new ArrayList<>();
-        mAccessbilityTaskMap = new HashMap<>(1);
+        mAccessbilityTaskMap = new HashMap<>();
         try {
             IAccessbility task = WechatAccessbility.class.newInstance();
             task.onCreateTask(this);
@@ -38,6 +38,12 @@ public class ListenWeChatService extends AccessibilityService {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onServiceConnected() {
+        super.onServiceConnected();
+        Log.e(TAG, "onServiceConnected");
     }
 
     @Override
@@ -54,5 +60,19 @@ public class ListenWeChatService extends AccessibilityService {
     @Override
     public void onInterrupt() {
         Log.e(TAG, "onInterrupt");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAccessbilityTaskMap != null) {
+            mAccessbilityTaskMap.clear();
+        }
+        if (mAccessbilityTasks != null && !mAccessbilityTasks.isEmpty()) {
+            for (IAccessbility task : mAccessbilityTasks) {
+                task.onStopTask();
+            }
+            mAccessbilityTasks.clear();
+        }
     }
 }

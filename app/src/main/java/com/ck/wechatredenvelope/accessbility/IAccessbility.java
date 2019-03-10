@@ -12,6 +12,11 @@ import com.ck.wechatredenvelope.service.ListenWeChatService;
  */
 public interface IAccessbility {
 
+    /**
+     * test
+     *
+     * @return
+     */
     String getTargetPackageName();
 
     void onCreateTask(ListenWeChatService service);

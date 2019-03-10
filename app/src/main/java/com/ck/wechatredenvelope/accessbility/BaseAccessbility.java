@@ -1,5 +1,7 @@
 package com.ck.wechatredenvelope.accessbility;
 
+import android.content.Context;
+
 import com.ck.wechatredenvelope.service.ListenWeChatService;
 
 /**
@@ -19,5 +21,9 @@ public abstract class BaseAccessbility implements IAccessbility{
 
     public ListenWeChatService getService(){
         return service;
+    }
+
+    public Context getContext() {
+        return service.getApplicationContext();
     }
 }
